@@ -52,6 +52,7 @@ function App() {
             className="textarea grow w-full"
             placeholder="Commands will appear here..."
             value={command}
+            readOnly
           />
         </div>
       </div>
