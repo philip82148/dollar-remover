@@ -16,6 +16,8 @@ function App() {
       .map((line) => line.replace(/^\s*(\$|#)\s*/, ""))
       .join("\n");
     setCommand(cmd);
+    if (!cmd.trim()) return;
+
     await navigator.clipboard.writeText(cmd);
     if (toastId.current === null) {
       toastId.current = toast("Command copied to clipboard!", {
