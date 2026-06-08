@@ -1,10 +1,31 @@
 import "./App.css";
 
-import { useState } from "react";
-import { toast, ToastContainer } from "react-toastify";
+import { useRef, useState } from "react";
+import { type Id, toast, ToastContainer } from "react-toastify";
 
 function App() {
   const [command, setCommand] = useState<string>("");
+  const toastId = useRef<Id | null>(null);
+
+  const handleInputChange = async (
+    e: React.ChangeEvent<HTMLTextAreaElement>,
+  ) => {
+    const prompt = e.target.value;
+    const cmd = prompt
+      .split("\n")
+      .map((line) => line.replace(/^\s*(\$|#)\s*/, ""))
+      .join("\n");
+    setCommand(cmd);
+    await navigator.clipboard.writeText(cmd);
+    if (toastId.current === null) {
+      toastId.current = toast("Command copied to clipboard!", {
+        type: "success",
+      });
+    } else {
+      toast.update(toastId.current);
+    }
+  };
+
   return (
     <div className="w-screen h-screen flex flex-col items-center bg-base-200">
       <div className="navbar bg-base-100 shadow-sm">
@@ -22,21 +43,7 @@ function App() {
           <textarea
             className="textarea grow w-full"
             placeholder="Paste Shell Prompts..."
-            onChange={async (e) => {
-              const prompt = e.target.value;
-              const cmd = prompt
-                .split("\n")
-                .map((line) =>
-                  line
-                    .trim()
-                    .replace(/^(\$|#)/, "")
-                    .trim(),
-                )
-                .join("\n");
-              setCommand(cmd);
-              await navigator.clipboard.writeText(cmd);
-              toast("Command copied to clipboard!", { type: "success" });
-            }}
+            onChange={handleInputChange}
           />
         </div>
         <div className="flex flex-col grow gap-2">
