@@ -35,8 +35,7 @@ function App() {
           <a className="btn btn-ghost text-xl">Dollar Remover</a>
         </h1>
         <div className="ml-4 text-sm mt-1.5 opacity-70">
-          Clean terminal commands copied from documentation, blogs, and
-          tutorials.
+          Remove $, #, and other shell prompts from copied terminal commands.
         </div>
       </div>
       <div className="container grow my-20 rounded-2xl bg-base-100 flex flex-col gap-10 p-10">
