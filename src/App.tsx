@@ -6,8 +6,17 @@ import { toast, ToastContainer } from "react-toastify";
 function App() {
   const [command, setCommand] = useState<string>("");
   return (
-    <div className="w-screen h-screen flex justify-center bg-base-200">
-      <div className="container my-20 rounded-2xl bg-base-100 flex flex-col gap-10 p-10">
+    <div className="w-screen h-screen flex flex-col items-center bg-base-200">
+      <div className="navbar bg-base-100 shadow-sm">
+        <h1>
+          <a className="btn btn-ghost text-xl">Dollar Remover</a>
+        </h1>
+        <div className="ml-4 text-sm mt-1.5 opacity-70">
+          Clean terminal commands copied from documentation, blogs, and
+          tutorials.
+        </div>
+      </div>
+      <div className="container grow my-20 rounded-2xl bg-base-100 flex flex-col gap-10 p-10">
         <div className="flex flex-col grow gap-2">
           <div className="font-bold text-3xl">Input</div>
           <textarea
